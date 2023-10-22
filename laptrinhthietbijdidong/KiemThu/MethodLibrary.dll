@@ -1,0 +1,45 @@
+    public class MethodLibrary
+    {
+        public Boolean primeCheck(int num)
+        {
+            const int max = 1000;   // Set upper bounds.
+            const int min = 0;      // Set lower bounds. 
+            if (num < 0)               //If less than lower bounds
+                throw new Exception();
+            else if (num > max)   //If greater than upper bounds
+                throw new Exception();
+            double sqroot = Math.Sqrt(max);     // Find square root of n
+            //Initialize array to hold prime numbers
+            Boolean[] primeBucket = new Boolean[max + 1];
+            //Initialize all elements to true, then set non-primes to false
+            for (int i = 2; i <= max; i++)
+            {
+                primeBucket[i] = true;
+            }
+            //Do all multiples of 2 first
+            int j = 2;
+            for (int i = j + j; i <= max; i = i + j)
+            {      //start with 2j as 2 is prime
+                primeBucket[i] = false;              //set all multiples to false
+            }
+            for (j = 3; j <= sqroot; j = j + 2)
+            {         // do up to sqrt of n
+                if (primeBucket[j] == true)
+                {         // only do if j is a prime
+                    for (int i = j + j; i <= max; i = i + j)
+                    {  // start with 2j as j is prime
+                        primeBucket[i] = false;          // set all multiples to false
+                    }
+                }
+            }
+            //Check input against prime array
+            if (primeBucket[num] == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
